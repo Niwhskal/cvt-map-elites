@@ -21,8 +21,8 @@ class Environment():
 
     def initialize(self):
         self.settings = Settings('worlds/environ.xml')
-        self.env_map = settings.map()
-        self.robot = settings.robot()
+        self.env_map = self.settings.map()
+        self.robot = self.settings.robot()
 
         self.d = Display(self.env_map, self.robot)
 
