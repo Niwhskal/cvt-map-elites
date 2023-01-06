@@ -60,7 +60,7 @@ class Environment():
             self.robot.move(motor_l, motor_r, self.env_map)
             time.sleep(0.01)
 
-        return np.min(distance_toGoal_list), (pos.x(), pos.y())
+        return np.min(self.distance_toGoal_list), (pos.x(), pos.y())
 
 
 #--------------------------------------
