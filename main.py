@@ -71,6 +71,7 @@ def eval_genomes(genomes, config):
     print('Simulating Khera...')
     for genome_id, genome in genomes:
         net = neat.nn.FeedForwardNetwork.create(genome, config)
+        env = Environment()
         perf, desc = env.simulate(net) # run robot for 3k timesteps
         print(f'Performance of Genome {genome_id} : {perf}, terminated at {desc}')
         s = Species(genome, desc, perf)
@@ -127,7 +128,6 @@ if __name__ == '__main__':
 
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config')
-    env = Environment()
 
     # creating centroids
     c = cvt(N_niches, dim_map, samples)
