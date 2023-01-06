@@ -20,7 +20,7 @@ class Environment():
         self.ObstacleTooClose = 13
 
     def initialize(self):
-        self.settings = Settings('worlds/original_map.xml')
+        self.settings = Settings('worlds/environ.xml')
         self.env_map = settings.map()
         self.robot = settings.robot()
 
