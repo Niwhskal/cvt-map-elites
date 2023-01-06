@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import sys
-import numpy as np
 import math
+import time
+import numpy as np
+from pyfastsim import *
 
 class Environment():
 
@@ -13,13 +15,11 @@ class Environment():
 
         self.goal_x = 500
         self.goal_y = 500
-        self.display = display
-
 
         self.GoalReachedDistance = 5
         self.ObstacleTooClose = 13
 
-    def intialize(self):
+    def initialize(self):
         self.settings = Settings('worlds/original_map.xml')
         self.env_map = settings.map()
         self.robot = settings.robot()

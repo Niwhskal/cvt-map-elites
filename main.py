@@ -1,13 +1,16 @@
 import os
 import neat
 import visualize
+import numpy as np
+from pathlib import Path
+from simulation import Environment
 from sklearn.cluster import KMeans
 from sklearn.neighbors import KDTree
 
 
 
 def __add_to_archive(s, centroid, archive, kdt):
-    niche_index = kdt.query([centroid], k=1)[1][0][0]
+    niche_index = kdt.query(np.array(centroid), k=1)[1][0][0]
     niche = kdt.data[niche_index]
     n = cm.make_hashable(niche)
     s.centroid = n
@@ -44,13 +47,12 @@ def cvt(k, dim, samples, cvt_use_cache=True):
     print("Computing CVT (this can take a while...):", fname)
 
     if dim==2:
-        print('Sampling random 2-d values')
         x = np.random.rand(samples, dim)
     else:
         raise NotImplementedError
 
     k_means = KMeans(init='k-means++', n_clusters=k,
-                     n_init=1, n_jobs=-1, verbose=1)#,algorithm="full")
+                     n_init=1, verbose=1)#,algorithm="full")
     k_means.fit(x)
     __write_centroids(k_means.cluster_centers_)
 
@@ -65,9 +67,11 @@ class Species:
 
 
 def eval_genomes(genomes, config):
+    print('Simulating Khera...')
     for genome_id, genome in genomes:
         net = neat.nn.FeedForwardNetwork.create(genome, config)
-        perf, desc = env.simulate(nn, display=False) # run robot for 3k timesteps
+        perf, desc = env.simulate(net, display=False) # run robot for 3k timesteps
+        print(f'Performance of Genome {genome_id} : {perf}, terminated at {desc}')
         s = Species(genome, desc, perf)
         __add_to_archive(s, desc, archive, kdt)
         genome.fitness = perf
@@ -75,6 +79,7 @@ def eval_genomes(genomes, config):
 
 def run(config_file):
     # Load configuration.
+    print('Starting NEAT ...')
     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_file)
@@ -125,9 +130,11 @@ if __name__ == '__main__':
 
     # creating centroids
     c = cvt(N_niches, dim_map, samples)
+    print('Creating KDTree...')
     kdt = KDTree(c, leaf_size = 30, metric='euclidean')
 
     # create an empty archive
+    print('Creating empty archive')
     archive = {}
 
     run(config_path)
