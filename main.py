@@ -10,7 +10,7 @@ from sklearn.neighbors import KDTree
 
 
 def __add_to_archive(s, centroid, archive, kdt):
-    niche_index = kdt.query(np.array(centroid), k=1)[1][0][0]
+    niche_index = kdt.query(np.array([np.array(centroid)]), k=1)[1][0][0]
     niche = kdt.data[niche_index]
     n = cm.make_hashable(niche)
     s.centroid = n
