@@ -77,6 +77,7 @@ def eval_genomes(genomes, config):
         s = Species(genome, desc, perf)
         __add_to_archive(s, desc, archive, kdt)
         genome.fitness = perf
+        del env
 
 
 def run(config_file):
