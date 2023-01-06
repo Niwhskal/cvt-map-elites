@@ -30,14 +30,10 @@ class Environment():
         self.ts = 0
         self.distance_toGoal_list = []
 
-    def simulate(self, nn, display=True):
+    def simulate(self, nn):
         self.initialize()
         while self.ts < self.N_timesteps:
-            if display:
-                self.d.update()
-            else:
-                self.env_map.update()
-
+            self.d.update()
             pos = self.robot.get_pos()
             dist2goal = math.sqrt((pos.x()-self.goal_x)**2+(pos.y()-self.goal_y)**2)
             self.distance_toGoal_list.append(dist2goal)

@@ -70,7 +70,7 @@ def eval_genomes(genomes, config):
     print('Simulating Khera...')
     for genome_id, genome in genomes:
         net = neat.nn.FeedForwardNetwork.create(genome, config)
-        perf, desc = env.simulate(net, display=False) # run robot for 3k timesteps
+        perf, desc = env.simulate(net) # run robot for 3k timesteps
         print(f'Performance of Genome {genome_id} : {perf}, terminated at {desc}')
         s = Species(genome, desc, perf)
         __add_to_archive(s, desc, archive, kdt)
@@ -102,7 +102,7 @@ def run(config_file):
     # Show output of the most fit genome against training data.
     print('\nOutput:')
     winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
-    perf = env.simulate(winner_net, display = True)
+    perf = env.simulate(winner_net)
     print(f"Distance to goal : {perf}")
 
     # node_names = {-1: 'LeftRadar', -2: 'CenterRadar', -3: 'RightRadar', -4: "Slice1", -5: "Slice2", -6: "Slice3", -7: "Slice4", 0: 'Lvel', 1: "Rvel" }
