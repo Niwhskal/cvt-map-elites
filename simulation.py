@@ -57,7 +57,7 @@ class Environment():
 
             motor_l, motor_r = nn.activate(inp)
             self.ts += 1
-            self.robot.move(motor_l, motor_r, self.env_map)
+            self.robot.move(motor_l, motor_r, self.env_map, sticky_walls=False)
             time.sleep(0.01)
 
         return np.min(self.distance_toGoal_list), (pos.x(), pos.y())
