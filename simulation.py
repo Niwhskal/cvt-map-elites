@@ -16,7 +16,7 @@ class Environment():
         self.goal_x = 500
         self.goal_y = 500
 
-        self.GoalReachedDistance = 5
+        self.GoalReachedDistance = 10
         self.ObstacleTooClose = 13
 
     def initialize(self):
