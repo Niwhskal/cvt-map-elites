@@ -7,12 +7,13 @@ from simulation import Environment
 from sklearn.cluster import KMeans
 from sklearn.neighbors import KDTree
 
-
+def make_hashable(array):
+    return tuple(map(float, array))
 
 def __add_to_archive(s, centroid, archive, kdt):
     niche_index = kdt.query(np.array([np.array(centroid)]), k=1)[1][0][0]
     niche = kdt.data[niche_index]
-    n = cm.make_hashable(niche)
+    n = make_hashable(niche)
     s.centroid = n
     if n in archive:
         if s.fitness > archive[n].fitness:
