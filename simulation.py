@@ -29,6 +29,7 @@ class Environment():
         self.startT = time.time()
         self.ts = 0
         self.distance_toGoal_list = []
+        self.quitcounter = 0
 
     def simulate(self, nn):
         self.initialize()
@@ -58,6 +59,11 @@ class Environment():
             motor_l, motor_r = nn.activate(inp)
             self.ts += 1
             self.robot.move(motor_l, motor_r, self.env_map, sticky_walls=False)
+
+            if pos.x() == self.robot.get_pos().x() and pos.y() == self.robot.get_pose().y():
+                self.quitcounter += 1
+            if (pos.x() == self.robot.get_pos().x() and pos.y() == self.robot.get_pose().y()) and (self.quitcounter>50):
+                break
             time.sleep(0.01)
 
         return np.min(self.distance_toGoal_list), (pos.x()/1000, pos.y()/1000)
