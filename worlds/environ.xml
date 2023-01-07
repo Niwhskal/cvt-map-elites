@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <fastsim>
-  <display enable="false"/>
+  <!-- <display enable="false"/> -->
 
   <!-- world -->
   <map name="worlds/original_maze.pbm" size="1000"/>
