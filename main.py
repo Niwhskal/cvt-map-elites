@@ -143,6 +143,7 @@ if __name__ == '__main__':
     N_niches = 5000
     dim_map = 2
     samples = int(1000e03)
+    global genCnt
     genCnt = 0
 
     local_dir = os.path.dirname(__file__)
