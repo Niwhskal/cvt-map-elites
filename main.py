@@ -92,10 +92,10 @@ def eval_genomes(genomes, config):
         __add_to_archive(s, desc, archive, kdt)
         genome.fitness = perf
         del env
-    global genCnt
-    genCnt += 1
-    print(f'Saving Archive at gen: {genCnt}')
-    __save_archive(archive, genCnt)
+    # global genCnt
+    # genCnt += 1
+    # print(f'Saving Archive at gen: {genCnt}')
+    # __save_archive(archive, genCnt)
 
 
 def run(config_file):
@@ -144,8 +144,8 @@ if __name__ == '__main__':
     N_niches = 5000
     dim_map = 2
     samples = int(1000e03)
-    global genCnt
-    genCnt = 0
+    # global genCnt
+    # genCnt = 0
 
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config')
