@@ -60,9 +60,9 @@ class Environment():
             self.ts += 1
             self.robot.move(motor_l, motor_r, self.env_map, sticky_walls=False)
 
-            if pos.x() == self.robot.get_pos().x() and pos.y() == self.robot.get_pose().y():
+            if pos.x() == self.robot.get_pos().x() and pos.y() == self.robot.get_pos().y():
                 self.quitcounter += 1
-            if (pos.x() == self.robot.get_pos().x() and pos.y() == self.robot.get_pose().y()) and (self.quitcounter>50):
+            if (pos.x() == self.robot.get_pos().x() and pos.y() == self.robot.get_pos().y()) and (self.quitcounter>50):
                 break
             time.sleep(0.01)
 
