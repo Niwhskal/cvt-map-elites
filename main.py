@@ -7,6 +7,20 @@ from simulation import Environment
 from sklearn.cluster import KMeans
 from sklearn.neighbors import KDTree
 
+
+def __save_archive(archive, gen):
+    def write_array(a, f):
+        for i in a:
+            f.write(str(i) + ' ')
+    filename = 'archive_' + str(gen) + '.dat'
+    with open(filename, 'w') as f:
+        for k in archive.values():
+            f.write(str(k.fitness) + ' ')
+            write_array(k.centroid, f)
+            write_array(k.desc, f)
+            write_array(k.x, f)
+            f.write("\n")
+
 def make_hashable(array):
     return tuple(map(float, array))
 
@@ -78,6 +92,9 @@ def eval_genomes(genomes, config):
         __add_to_archive(s, desc, archive, kdt)
         genome.fitness = perf
         del env
+    genCnt += 1
+    print(f'Saving Archive at gen: {genCnt}')
+    __save_archive(archive, genCnt)
 
 
 def run(config_file):
@@ -94,7 +111,7 @@ def run(config_file):
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
-    p.add_reporter(neat.Checkpointer(5))
+    p.add_reporter(neat.Checkpointer(1))
 
     # Run for up to 990 generations.
     winner = p.run(eval_genomes, 990)
@@ -126,6 +143,7 @@ if __name__ == '__main__':
     N_niches = 5000
     dim_map = 2
     samples = int(1000e03)
+    genCnt = 0
 
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config')
