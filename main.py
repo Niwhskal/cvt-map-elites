@@ -92,6 +92,7 @@ def eval_genomes(genomes, config):
         __add_to_archive(s, desc, archive, kdt)
         genome.fitness = perf
         del env
+    global genCnt
     genCnt += 1
     print(f'Saving Archive at gen: {genCnt}')
     __save_archive(archive, genCnt)
