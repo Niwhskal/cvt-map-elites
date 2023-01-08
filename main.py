@@ -115,7 +115,7 @@ def run(config_file):
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
 
-    pe = neat.ParallelEvaluator(multiprocessing.cpu_count(), eval_genome)
+    pe = neat.ParallelEvaluator(multiprocessing.cpu_count(), eval_genomes)
 
     # Run for up to 990 generations.
     winner = p.run(pe.evaluate, 990)
