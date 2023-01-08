@@ -2,6 +2,7 @@ import os
 import neat
 import visualize
 import numpy as np
+import multiprocessing
 from pathlib import Path
 from simulation import Environment
 from sklearn.cluster import KMeans
@@ -87,10 +88,10 @@ def eval_genomes(genomes, config):
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         env = Environment()
         perf, desc = env.simulate(net) # run robot for 3k timesteps
-        print(f'Performance of Genome {genome_id} : {perf}, terminated at {desc}')
-        s = Species(genome, desc, perf)
+        print(f'Performance of Genome {genome_id} : {-perf}, terminated at {desc}')
+        s = Species(genome, desc, -perf)
         __add_to_archive(s, desc, archive, kdt)
-        genome.fitness = perf
+        genome.fitness = -perf
         del env
     # global genCnt
     # genCnt += 1
@@ -114,8 +115,10 @@ def run(config_file):
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
 
+    pe = neat.ParallelEvaluator(multiprocessing.cpu_count(), eval_genome)
+
     # Run for up to 990 generations.
-    winner = p.run(eval_genomes, 990)
+    winner = p.run(pe.evaluate, 990)
 
     # Display the winning genome.
     print('\nBest genome:\n{!s}'.format(winner))
