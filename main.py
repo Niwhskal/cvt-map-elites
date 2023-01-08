@@ -82,17 +82,17 @@ class Species:
         self.centroid = centroid
 
 
-def eval_genomes(genomes, config):
+def eval_genome(genome, config):
     print('Simulating Khera...')
-    for genome_id, genome in genomes:
-        net = neat.nn.FeedForwardNetwork.create(genome, config)
-        env = Environment()
-        perf, desc = env.simulate(net) # run robot for 3k timesteps
-        print(f'Performance of Genome {genome_id} : {-perf}, terminated at {desc}')
-        s = Species(genome, desc, -perf)
-        __add_to_archive(s, desc, archive, kdt)
-        genome.fitness = -perf
-        del env
+    # for genome_id, genome in genomes:
+    net = neat.nn.FeedForwardNetwork.create(genome, config)
+    env = Environment()
+    perf, desc = env.simulate(net) # run robot for 3k timesteps
+    print(f'Performance of Genome {genome_id} : {-perf}, terminated at {desc}')
+    s = Species(genome, desc, -perf)
+    __add_to_archive(s, desc, archive, kdt)
+    genome.fitness = -perf
+    del env
     # global genCnt
     # genCnt += 1
     # print(f'Saving Archive at gen: {genCnt}')
@@ -115,7 +115,7 @@ def run(config_file):
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
 
-    pe = neat.ParallelEvaluator(multiprocessing.cpu_count(), eval_genomes)
+    pe = neat.ParallelEvaluator(multiprocessing.cpu_count(), eval_genome)
 
     # Run for up to 990 generations.
     winner = p.run(pe.evaluate, 990)
