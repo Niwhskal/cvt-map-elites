@@ -91,8 +91,9 @@ def eval_genome(genome, config):
     print(f'Performance of Genome : {-perf}, terminated at {desc}')
     s = Species(genome, desc, -perf)
     __add_to_archive(s, desc, archive, kdt)
-    genome.fitness = -perf
+    # genome.fitness = -perf
     del env
+    return -perf
     # global genCnt
     # genCnt += 1
     # print(f'Saving Archive at gen: {genCnt}')
