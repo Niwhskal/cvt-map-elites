@@ -88,7 +88,7 @@ def eval_genome(genome, config):
     net = neat.nn.FeedForwardNetwork.create(genome, config)
     env = Environment()
     perf, desc = env.simulate(net) # run robot for 3k timesteps
-    print(f'Performance of Genome {genome_id} : {-perf}, terminated at {desc}')
+    print(f'Performance of Genome : {-perf}, terminated at {desc}')
     s = Species(genome, desc, -perf)
     __add_to_archive(s, desc, archive, kdt)
     genome.fitness = -perf
