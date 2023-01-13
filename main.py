@@ -119,6 +119,7 @@ def run(config_file):
     pe = neat.ParallelEvaluator(multiprocessing.cpu_count(), eval_genome)
 
     # Run for up to 990 generations.
+    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-1')
     winner = p.run(pe.evaluate, 990)
 
     # Display the winning genome.
