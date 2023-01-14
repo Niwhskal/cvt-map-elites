@@ -1,8 +1,8 @@
 #--- parameters for the XOR-2 experiment ---#
 
 [NEAT]
-fitness_criterion     = max
-fitness_threshold     = -5.0
+fitness_criterion     = mean
+fitness_threshold     = -30.0
 pop_size              = 2000
 reset_on_extinction   = False
 
