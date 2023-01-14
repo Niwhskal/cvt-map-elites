@@ -88,8 +88,9 @@ def eval_genome(genome, config):
     # genome.fitness = -perf
     global genCnt
     genCnt += 1
-    print(f'Saving Archive at gen: {genCnt}')
-    __save_archive(archive, genCnt)
+    if genCnt %990 == 0:
+        print(f'Saving Archive at gen: {genCnt%990}')
+        __save_archive(archive, genCnt)
 
     del env
     return -perf
