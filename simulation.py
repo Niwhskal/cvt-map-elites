@@ -8,7 +8,7 @@ from pyfastsim import *
 
 class Environment():
 
-    def __init__(self):
+    def __init__(self, todisplay=False):
         self.N_timesteps = 3000
         self.init_x = 500
         self.init_y = 900
@@ -19,28 +19,31 @@ class Environment():
         self.GoalReachedDistance = 10
         self.ObstacleTooClose = 13
 
+        self.todisplay = todisplay
+
     def initialize(self):
 
-        self.env_map = Map('worlds/original_maze.pbm', 1000)
+        if self.todisplay:
+            self.settings = Settings('worlds/environ.xml')
+            self.env_map = self.settings.map()
+            self.robot = self.settings.robot()
 
-        self.env_map.add_goal(Goal(500,500,30,0))
+            self.d = Display(self.env_map, self.robot)
 
-        self.robot = Robot(20.0, Posture(500, 920, 0))
+        else:
 
-        self.robot.add_laser(Laser(45, 1000.0))
-        self.robot.add_laser(Laser(-45, 1000.0))
-        self.robot.add_laser(Laser(0, 1000.0))
+            self.env_map = Map('worlds/original_maze.pbm', 1000)
 
-        self.robot.add_radar(Radar(0,4))
+            self.env_map.add_goal(Goal(500,500,30,0))
 
-        # self.d = Display(self.env_map, self.robot)
+            self.robot = Robot(20.0, Posture(500, 920, 0))
 
+            self.robot.add_laser(Laser(45, 1000.0))
+            self.robot.add_laser(Laser(-45, 1000.0))
+            self.robot.add_laser(Laser(0, 1000.0))
 
-        # self.settings = Settings('worlds/environ.xml')
-        # self.env_map = self.settings.map()
-        # self.robot = self.settings.robot()
+            self.robot.add_radar(Radar(0,4))
 
-        # self.d = Display(self.env_map, self.robot)
 
         self.startT = time.time()
         self.ts = 0
@@ -50,8 +53,10 @@ class Environment():
     def simulate(self, nn):
         self.initialize()
         while self.ts < self.N_timesteps:
-            # self.d.update()
-            self.env_map.update()
+            if self.todisplay:
+                self.d.update()
+            else:
+                self.env_map.update()
             pos = self.robot.get_pos()
             dist2goal = math.sqrt((pos.x()-self.goal_x)**2+(pos.y()-self.goal_y)**2)
             self.distance_toGoal_list.append(dist2goal)
