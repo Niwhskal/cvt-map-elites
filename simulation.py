@@ -27,8 +27,8 @@ class Environment():
 
         self.robot = Robot(20.0, Posture(500, 920, 0))
 
-        self.robot.add_laser(Laser(M_PI/4.0, 1000.0))
-        self.robot.add_laser(Laser(-M_PI/4.0, 1000.0))
+        self.robot.add_laser(Laser(45, 1000.0))
+        self.robot.add_laser(Laser(-45, 1000.0))
         self.robot.add_laser(Laser(0, 1000.0))
 
         self.robot.add_radar(Radar(0,4))
