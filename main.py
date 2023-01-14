@@ -3,6 +3,7 @@ import neat
 import visualize
 import numpy as np
 import multiprocessing
+import pickle
 from pathlib import Path
 from simulation import Environment
 from sklearn.cluster import KMeans
@@ -10,17 +11,10 @@ from sklearn.neighbors import KDTree
 
 
 def __save_archive(archive, gen):
-    def write_array(a, f):
-        for i in a:
-            f.write(str(i) + ' ')
-    filename = 'archive_' + str(gen) + '.dat'
-    with open(filename, 'w') as f:
-        for k in archive.values():
-            f.write(str(k.fitness) + ' ')
-            write_array(k.centroid, f)
-            write_array(k.desc, f)
-            write_array(k.x, f)
-            f.write("\n")
+    filename = './archives/archive_' + str(gen) + '.pkl'
+    with open(filename, 'wb') as f:
+        pickle.dump(archive, f, pickle.HIGHEST_PROTOCOL)
+
 
 def make_hashable(array):
     return tuple(map(float, array))
@@ -92,12 +86,13 @@ def eval_genome(genome, config):
     s = Species(genome, desc, -perf)
     __add_to_archive(s, desc, archive, kdt)
     # genome.fitness = -perf
+    global genCnt
+    genCnt += 1
+    print(f'Saving Archive at gen: {genCnt}')
+    __save_archive(archive, genCnt)
+
     del env
     return -perf
-    # global genCnt
-    # genCnt += 1
-    # print(f'Saving Archive at gen: {genCnt}')
-    # __save_archive(archive, genCnt)
 
 
 def run(config_file):
@@ -119,7 +114,7 @@ def run(config_file):
     pe = neat.ParallelEvaluator(multiprocessing.cpu_count(), eval_genome)
 
     # Run for up to 990 generations.
-    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-1')
+    # p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-1')
     winner = p.run(pe.evaluate, 990)
 
     # Display the winning genome.
@@ -149,8 +144,8 @@ if __name__ == '__main__':
     N_niches = 5000
     dim_map = 2
     samples = int(1000e03)
-    # global genCnt
-    # genCnt = 0
+    global genCnt
+    genCnt = 0
 
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config')
