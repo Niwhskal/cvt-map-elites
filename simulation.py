@@ -20,11 +20,27 @@ class Environment():
         self.ObstacleTooClose = 13
 
     def initialize(self):
-        self.settings = Settings('worlds/environ.xml')
-        self.env_map = self.settings.map()
-        self.robot = self.settings.robot()
+
+        self.env_map = Map('worlds/original_maze.pbm', 1000)
+
+        self.env_map.add_goal(Goal(500,500,30,0))
+
+        self.robot = Robot(20.0f, Posture(500, 920, 0))
+
+        self.robot.add_laser(Laser(M_PI/4.0, 1000.0f))
+        self.robot.add_laser(Laser(-M_PI/4.0, 1000.0f))
+        self.robot.add_laser(Laser(0, 1000.0f))
+
+        self.robot.add_radar(Radar(0,4))
 
         self.d = Display(self.env_map, self.robot)
+
+
+        # self.settings = Settings('worlds/environ.xml')
+        # self.env_map = self.settings.map()
+        # self.robot = self.settings.robot()
+
+        # self.d = Display(self.env_map, self.robot)
 
         self.startT = time.time()
         self.ts = 0
