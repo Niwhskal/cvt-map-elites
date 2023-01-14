@@ -25,11 +25,11 @@ class Environment():
 
         self.env_map.add_goal(Goal(500,500,30,0))
 
-        self.robot = Robot(20.0f, Posture(500, 920, 0))
+        self.robot = Robot(20.0, Posture(500, 920, 0))
 
-        self.robot.add_laser(Laser(M_PI/4.0, 1000.0f))
-        self.robot.add_laser(Laser(-M_PI/4.0, 1000.0f))
-        self.robot.add_laser(Laser(0, 1000.0f))
+        self.robot.add_laser(Laser(M_PI/4.0, 1000.0))
+        self.robot.add_laser(Laser(-M_PI/4.0, 1000.0))
+        self.robot.add_laser(Laser(0, 1000.0))
 
         self.robot.add_radar(Radar(0,4))
 
