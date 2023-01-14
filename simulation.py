@@ -55,8 +55,6 @@ class Environment():
         while self.ts < self.N_timesteps:
             if self.todisplay:
                 self.d.update()
-            else:
-                self.env_map.update()
             pos = self.robot.get_pos()
             dist2goal = math.sqrt((pos.x()-self.goal_x)**2+(pos.y()-self.goal_y)**2)
             self.distance_toGoal_list.append(dist2goal)
