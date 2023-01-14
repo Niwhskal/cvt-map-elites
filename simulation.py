@@ -33,7 +33,7 @@ class Environment():
 
         self.robot.add_radar(Radar(0,4))
 
-        self.d = Display(self.env_map, self.robot)
+        # self.d = Display(self.env_map, self.robot)
 
 
         # self.settings = Settings('worlds/environ.xml')
@@ -50,7 +50,8 @@ class Environment():
     def simulate(self, nn):
         self.initialize()
         while self.ts < self.N_timesteps:
-            self.d.update()
+            # self.d.update()
+            self.env_map.update()
             pos = self.robot.get_pos()
             dist2goal = math.sqrt((pos.x()-self.goal_x)**2+(pos.y()-self.goal_y)**2)
             self.distance_toGoal_list.append(dist2goal)
