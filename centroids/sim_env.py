@@ -8,7 +8,7 @@ from pyfastsim import *
 
 class Environment():
 
-    def __init__(self, todisplay=False):
+    def __init__(self, dims, todisplay=False):
         self.N_timesteps = 3000
         self.init_x = 500
         self.init_y = 900
@@ -20,8 +20,9 @@ class Environment():
         self.ObstacleTooClose = 13
 
         self.todisplay = todisplay
+        self.split_value = dims
 
-    def initialize(self, dims):
+    def initialize(self):
 
         if self.todisplay:
             self.settings = Settings('worlds/environ.xml')
@@ -44,7 +45,6 @@ class Environment():
 
             self.robot.add_radar(Radar(0,4))
 
-        self.split_value = dims
         self.startT = time.time()
         self.ts = 0
         self.distance_toGoal_list = []
