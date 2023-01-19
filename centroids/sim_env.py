@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import os
 import sys
 import math
 import time
@@ -33,7 +33,7 @@ class Environment():
 
         else:
 
-            self.env_map = Map('worlds/original_maze.pbm', 1000)
+            self.env_map = Map(os.path.join('../', 'worlds/original_maze.pbm'), 1000)
 
             self.env_map.add_goal(Goal(500,500,30,0))
 
