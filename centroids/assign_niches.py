@@ -122,7 +122,7 @@ def run(config_file):
     for ckpt in ckpts:
         p = neat.Checkpointer.restore_checkpoint(os.path.join('../', ckpt))
         genomes = p.population.items()
-        performances = eval_genome(genomes)
+        performances = eval_genome(genomes, config)
 
         np.save(f'./perf_{ckpt}', np.array(performances))
 
