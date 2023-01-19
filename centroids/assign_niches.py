@@ -120,7 +120,7 @@ def run(config_file):
     ckpts = ['neat-checkpoint-20', 'neat-checkpoint-22', 'neat-checkpoint-25', 'neat-checkpoint-29', 'neat-checkpoint-30']
 
     for ckpt in ckpts:
-        p = neat.Checkpointer.restore_checkpoint(ckpt)
+        p = neat.Checkpointer.restore_checkpoint(os.path.join('../', ckpt))
         genomes = p.items()
         performances = eval_genome(genomes)
 
@@ -156,7 +156,7 @@ if __name__ == '__main__':
     global genCnt
     genCnt = 0
 
-    local_dir = os.path.dirname(__file__)
+    local_dir = '../'#os.path.dirname(__file__)
     config_path = os.path.join(local_dir, 'config')
 
     # creating centroids
