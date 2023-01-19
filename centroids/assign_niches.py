@@ -80,6 +80,7 @@ def eval_genome(genomes, config):
     print('Simulating Khera...')
     performances = []
     for genome_id, genome in genomes:
+        print(f'running for :{genome_id}')
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         env = Environment(dims =2)
         perf = env.simulate(net) # run robot for 3k timesteps
