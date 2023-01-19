@@ -88,18 +88,18 @@ class Environment():
                 break
             time.sleep(0.01)
 
-        _lx = [i[0] for i in self.pos_list]
-        _ly = [i[1] for i in self.pos_list]
+        # _lx = [i[0] for i in self.pos_list]
+        # _ly = [i[1] for i in self.pos_list]
 
-        x_es = np.split(np.array(_lx), self.split_value)
-        x_es = [np.mean(j) for j in x_es]
+        # x_es = np.split(np.array(_lx), self.split_value)
+        # x_es = [np.mean(j) for j in x_es]
 
-        y_es = np.split(np.array(_ly), self.split_value)
-        y_es = [np.mean(j) for j in y_es]
+        # y_es = np.split(np.array(_ly), self.split_value)
+        # y_es = [np.mean(j) for j in y_es]
 
-        com_list = [(i,j) for i, j in zip(x_es, y_es)]
+        # com_list = [(i,j) for i, j in zip(x_es, y_es)]
 
-        return np.min(self.distance_toGoal_list), com_list
+        return np.min(self.distance_toGoal_list)#, com_list
 
 
 #--------------------------------------
