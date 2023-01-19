@@ -160,13 +160,13 @@ if __name__ == '__main__':
     config_path = os.path.join(local_dir, 'config')
 
     # creating centroids
-    c = cvt(N_niches, dim_map, samples)
-    print('Creating KDTree...')
-    kdt = KDTree(c, leaf_size = 30, metric='euclidean')
+    # c = cvt(N_niches, dim_map, samples)
+    # print('Creating KDTree...')
+    # kdt = KDTree(c, leaf_size = 30, metric='euclidean')
 
-    # create an empty archive
-    print('Creating empty archive')
-    archive = {}
+    # # create an empty archive
+    # print('Creating empty archive')
+    # archive = {}
 
     run(config_path)
 
