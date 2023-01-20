@@ -116,7 +116,7 @@ def run(config_file):
 
     # Run for up to 990 generations.
     p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-30')
-    with open('archive_4000.pkl', "rb") as F:
+    with open('archive_2000.pkl', "rb") as F:
         archive = pickle.load(F)
 
     best_fitness = {}
