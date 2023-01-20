@@ -124,13 +124,15 @@ def run(config_file):
     winner = 0
     for cent_id, sp in archive.items():
         if sp.fitness >b_ft:
-            best_fitness[cent_id] = sp.desc
+            best_fitness[cent_id] = sp.x
             b_ft = sp.fitness
-            winner = sp.x
             print(b_ft)
 
 
     # winner = p.run(pe.evaluate, 990)
+
+    t, gensall = best_fitness.items()
+    winner = gensall[-1]
 
     # Display the winning genome.
     print('\nBest genome:\n{!s}'.format(winner))
