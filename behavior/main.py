@@ -131,7 +131,7 @@ def run(config_file):
 
     # winner = p.run(pe.evaluate, 990)
 
-    gensall = list(best_fitness.values()
+    gensall = list(best_fitness.values())
     winner = gensall[-2]
 
     # Display the winning genome.
