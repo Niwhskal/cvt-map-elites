@@ -5,7 +5,7 @@ import numpy as np
 import multiprocessing
 import pickle
 from pathlib import Path
-from sim_env import Environment
+# from sim_env import Environment
 from sklearn.cluster import KMeans
 from sklearn.neighbors import KDTree
 
@@ -168,5 +168,10 @@ if __name__ == '__main__':
     # print('Creating empty archive')
     # archive = {}
 
-    run(config_path)
+    # run(config_path)
+
+    with open("archive_62000.pkl","rb") as F:
+        arch = pickle.load(F)
+
+    print(len(arch.keys()))
 

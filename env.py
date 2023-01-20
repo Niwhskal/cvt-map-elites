@@ -20,7 +20,6 @@ class MazeEnv():
 
 
         # building border walls
-
         t[0:SIZE, 0:wall_thickness] = 1
         t[0:wall_thickness, 0:SIZE] = 1
         t[SIZE-wall_thickness:SIZE, 0:SIZE] = 1
@@ -72,8 +71,9 @@ def save_as_pbm(img, name, dest='./'):
 if __name__ == '__main__':
     env = MazeEnv(1000, 200, 100, 12)
     arr = env.throw_array()
+    plt.imshow(arr)
 
-    npbm.imwrite('original_maze.pbm', arr)
+    # npbm.imwrite('original_maze.pbm', arr)
 
 
 
