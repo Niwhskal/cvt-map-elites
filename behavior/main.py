@@ -138,6 +138,7 @@ def run(config_file):
     # # Show output of the most fit genome against training data.
     # print('\nOutput:')
     winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
+    env = Environment(display=True)
     perf = env.simulate(winner_net)
     # print(f"Distance to goal : {perf}")
 
