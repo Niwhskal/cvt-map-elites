@@ -142,7 +142,7 @@ def run(config_file):
     winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
     env = Environment(todisplay=True)
     perf = env.simulate(winner_net)
-    # print(f"Distance to goal : {perf}")
+    print(f"Distance to goal : {perf}")
 
     # # node_names = {-1: 'LeftRadar', -2: 'CenterRadar', -3: 'RightRadar', -4: "Slice1", -5: "Slice2", -6: "Slice3", -7: "Slice4", 0: 'Lvel', 1: "Rvel" }
     # visualize.draw_net(config, winner, True)#, node_names=node_names)
