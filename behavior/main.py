@@ -129,14 +129,15 @@ def run(config_file):
 
 
     # winner = p.run(pe.evaluate, 990)
+    ig, winner = best_fitness.items()
 
     # Display the winning genome.
-    # print('\nBest genome:\n{!s}'.format(winner))
+    print('\nBest genome:\n{!s}'.format(winner))
 
     # # Show output of the most fit genome against training data.
     # print('\nOutput:')
-    # winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
-    # perf = env.simulate(winner_net)
+    winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
+    perf = env.simulate(winner_net)
     # print(f"Distance to goal : {perf}")
 
     # # node_names = {-1: 'LeftRadar', -2: 'CenterRadar', -3: 'RightRadar', -4: "Slice1", -5: "Slice2", -6: "Slice3", -7: "Slice4", 0: 'Lvel', 1: "Rvel" }
